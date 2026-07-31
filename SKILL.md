@@ -26,6 +26,8 @@ Use the largest conversation corpus the current host actually exposes, not only 
 
 First report the coverage you can actually inspect: number of interaction units, sessions or threads, topics, and time slices. An interaction unit is a user turn plus the relevant Agent reply and any user correction or acceptance. Read all available turns when the corpus is small; use the stratified sampling procedure in `references/conversation-sampling.md` when it is large.
 
+When creating the profile, put a short privacy-safe coverage summary in optional `coverage_note` (for example, “当前线程 31 个互动单元，覆盖 4 类任务；未读取其他会话”). Never put names, source identifiers, or private quotes in this field.
+
 If the accessible corpus is too thin for a reliable result, ask for one of these inputs:
 
 - permission to use the host's conversation-search/history tool;

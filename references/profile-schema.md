@@ -34,6 +34,7 @@ Save UTF-8 JSON. Reject unknown structured objects, but allow optional scalar fi
 | `accent` | string | `#RRGGBB`; overrides roster accent |
 | `secondary` | string | `#RRGGBB`; overrides roster secondary |
 | `source_note` | string | short evidence limitation, not private quotes |
+| `coverage_note` | string | short, privacy-safe summary of inspected conversation coverage |
 | `image_mode` | string | `licensed`, `fan`, `original`, or `placeholder` |
 | `share_title` | string | optional Xiaohongshu title |
 | `share_hook` | string | optional first line of caption |

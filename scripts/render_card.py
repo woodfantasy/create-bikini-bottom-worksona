@@ -259,7 +259,7 @@ def serial_for(profile: dict[str, Any]) -> str:
 
 def receipt_copy(confidence: str) -> tuple[str, str, str]:
     if confidence == "low":
-        return "这一句话先露馅了", "ONE-LINE RECEIPT", "这一句话先露了三处馅："
+        return "证据先露馅了", "EARLY RECEIPTS", "当前证据在这三处先露馅："
     return "聊天记录把我卖了", "CHAT RECEIPTS", "聊天记录就是在这三处把我卖了："
 
 
@@ -398,12 +398,17 @@ def write_caption(profile: dict[str, Any], path: Path) -> None:
     title = profile.get("share_title") or f"Agent 说我是「{profile['worksona_title']}」"
     hook = profile.get("share_hook") or f"最扎心的不是像 {profile['character_name']}，而是这句："
     _, _, receipt_intro = receipt_copy(profile["confidence"])
+    coverage_note = str(profile.get("coverage_note", "")).strip()
+    if coverage_note:
+        evidence_scope = f"这次只让 Agent 根据{coverage_note}来判断"
+    else:
+        evidence_scope = "这次只让 Agent 根据当前可见、且我明确授权的对话来判断"
     hashtags = "#打工人 #人设卡 #AgentSkills #职场情绪 #海底打工人格"
     if profile.get("image_mode") in {"licensed", "fan"}:
         hashtags += " #海绵宝宝"
     caption = f"""# {title}
 
-让 Agent 翻完我这段时间的聊天，它给我的打工人格是：{profile['worksona_title']}。
+{evidence_scope}，它给我的打工人格是：{profile['worksona_title']}。
 
 {hook}
 “{profile['tagline']}”
@@ -419,7 +424,7 @@ def write_caption(profile: dict[str, Any], path: Path) -> None:
 本人现在决定把这句贴在工位上：
 “{profile['boundary_line']}”
 
-你觉得自己更像谁？要不要也让 Agent 翻一下聊天记录。
+你觉得自己更像谁？要不要也让 Agent 根据你授权的对话翻一下？
 
 {hashtags}
 """

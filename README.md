@@ -148,7 +148,7 @@ Every profile contains:
 - three evidence-based `evidence` items, written as chat receipts;
 - `work_mode`, `hidden_skill`, `workplace_wound`, and `boundary_line`;
 - playful battery and patch-count stats;
-- optional secondary character, avatar, image mode, and source note.
+- optional secondary character, avatar, image mode, source note, and privacy-safe coverage note.
 
 The three `evidence` strings are card-sized share copy, not the amount of conversation analyzed. The fuller evidence ledger stays in temporary working notes and is never published with private source text; ask for an anonymized appendix when you want to inspect more of the reasoning.
 

@@ -30,7 +30,7 @@ Aim for “collectible employee archive card,” not “children's party invitat
 1. **Archive masthead** — universe label, serial, and small confidence marker.
 2. **Identity block** — avatar, display name, character match, match score, worksona title, and three tags.
 3. **Emotional billboard** — the `tagline`; it must remain readable in a feed thumbnail.
-4. **Chat-receipt strip** — three numbered behavioral receipts under “聊天记录把我卖了”; use “这一句话先露馅了” for low-confidence profiles.
+4. **Chat-receipt strip** — three numbered behavioral receipts under “聊天记录把我卖了”; use “证据先露馅了” for low-confidence profiles so the label does not imply that only one message was analyzed.
 5. **Work fields** — four equal modules: 打工模式, 隐藏技能, 常见工伤, 本人声明.
 6. **Stats/footer** — remaining battery, patch count, confidence, and low-key disclaimer.
 
