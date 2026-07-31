@@ -1,9 +1,5 @@
 English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Português](README.pt.md) | [Français](README.fr.md)
 
-<p align="center">
-  <img src="assets/spongebob-fan-avatar.png" width="128" height="128" alt="SpongeBob fan-art avatar">
-</p>
-
 <h1 align="center">Bikini Bottom Worksona</h1>
 
 <p align="center">
@@ -17,10 +13,16 @@ English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국�
 </p>
 
 <p align="center">
-  <img src="assets/example-card.png" width="360" alt="Generated Bikini Bottom Worksona example card">
+  <img src="assets/example-card.png" width="500" alt="A generated Bikini Bottom Worksona 3:4 card">
 </p>
 
-> See the result first: the repository ships a generated example card so the product value is visible before installation.
+<p align="center"><strong>Real output, not a mockup:</strong> a conversation becomes a shareable worksona card.</p>
+
+<p align="center">
+  <img src="assets/default-avatars/spongebob.png" width="180" height="180" alt="Role-matched SpongeBob worksona avatar">
+</p>
+
+<p align="center"><em>Role-matched default avatar for hosts without an image tool.</em></p>
 
 Turn the conversation style visible to your agent into a standardized **Bikini Bottom-inspired worksona card**: a character mapping, a relatable workplace identity, a sharp repostable line, and a Xiaohongshu-ready caption.
 

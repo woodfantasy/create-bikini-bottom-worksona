@@ -5,10 +5,16 @@
 <p align="center"><strong>把聊天风格，变成一张有共鸣的打工人设卡</strong></p>
 
 <p align="center">
-  <img src="assets/example-card.png" width="360" alt="已生成的 Bikini Bottom Worksona 示例卡">
+  <img src="assets/example-card.png" width="500" alt="实际生成的 Bikini Bottom Worksona 3:4 人设卡">
 </p>
 
-> 先看结果再安装：仓库直接附带一张已生成的人设卡，让产品价值一眼可见。
+<p align="center"><strong>这不是概念图：</strong>这是由对话实际生成、可以直接分享的 3:4 人设卡。</p>
+
+<p align="center">
+  <img src="assets/default-avatars/spongebob.png" width="180" height="180" alt="按角色匹配的海绵宝宝默认头像">
+</p>
+
+<p align="center"><em>没有生图能力时，也会按角色匹配默认头像，而不是使用无趣的通用占位图。</em></p>
 
 把 Agent 当前能看到的对话风格、工作习惯和自我描述，映射成一个海绵宝宝宇宙灵感的打工人格：角色匹配、工作身份、适合转发的一句话，以及小红书分享文案。
 
