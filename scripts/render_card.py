@@ -26,6 +26,32 @@ PAPER = "#FBF6E8"
 CORAL = "#FF7B6B"
 FONT = "'PingFang SC','Noto Sans CJK SC','Microsoft YaHei','Arial',sans-serif"
 
+CJK_BREAK_AFTER = frozenset("，。！？；：、”’」』】》）")
+CJK_FORBIDDEN_START = frozenset("，。！？；：、）》】」』”’…")
+CJK_FORBIDDEN_END = frozenset("（《【「『“‘")
+CJK_NUMERALS = frozenset("零〇一二三四五六七八九十百千万亿两")
+CJK_PROTECTED_TERMS = (
+    "聊天记录",
+    "工作模式",
+    "隐藏技能",
+    "常见工伤",
+    "本人声明",
+    "顺手改一下",
+    "还原",
+    "十二",
+    "真实需求",
+    "研究",
+    "直接运行",
+    "可运行",
+    "交付",
+    "验收条件",
+    "默认兜底人",
+    "容易",
+    "擅自补全",
+    "无限续杯",
+    "人设",
+)
+
 PALETTES = {
     "spongebob": ("#FFD84D", "#79D9D4"),
     "squidward": ("#77C9C5", "#C7A6E8"),
@@ -79,6 +105,57 @@ def tokenize(value: str) -> list[str]:
     return tokens
 
 
+def break_splits_protected_term(value: str, index: int) -> bool:
+    for term in CJK_PROTECTED_TERMS:
+        start = value.find(term)
+        while start >= 0:
+            if start < index < start + len(term):
+                return True
+            start = value.find(term, start + 1)
+    return False
+
+
+def balanced_cjk_two_lines(value: str, max_units: float) -> list[str] | None:
+    """Find a readable two-line CJK split when the full text fits in two lines."""
+    compact = value.strip()
+    if len(compact) < 2:
+        return None
+
+    candidates: list[tuple[float, str, str]] = []
+    minimum_line = max_units * 0.30
+    for index in range(1, len(compact)):
+        left = compact[:index].rstrip()
+        right = compact[index:].lstrip()
+        if not left or not right:
+            continue
+        left_units = text_width_units(left)
+        right_units = text_width_units(right)
+        if left_units > max_units or right_units > max_units:
+            continue
+
+        previous = compact[index - 1]
+        following = compact[index]
+        penalty = abs(left_units - right_units)
+        if min(left_units, right_units) < minimum_line:
+            penalty += (minimum_line - min(left_units, right_units)) * 2.5
+        if previous in CJK_BREAK_AFTER:
+            penalty -= max_units * 0.48
+        if following in CJK_FORBIDDEN_START or previous in CJK_FORBIDDEN_END:
+            penalty += max_units * 4
+        if previous.isascii() and following.isascii() and previous.isalnum() and following.isalnum():
+            penalty += max_units * 4
+        if previous in CJK_NUMERALS and following in CJK_NUMERALS:
+            penalty += max_units * 4
+        if break_splits_protected_term(compact, index):
+            penalty += max_units * 4
+        candidates.append((penalty, left, right))
+
+    if not candidates:
+        return None
+    _, left, right = min(candidates, key=lambda item: item[0])
+    return [left, right]
+
+
 def wrap_text(value: str, width_px: float, font_size: float, max_lines: int) -> list[str]:
     max_units = width_px / font_size
     lines: list[str] = []
@@ -93,6 +170,15 @@ def wrap_text(value: str, width_px: float, font_size: float, max_lines: int) -> 
     if line or not lines:
         lines.append(line.rstrip())
 
+    cjk_count = sum(1 for char in value if ord(char) >= 128)
+    visible_count = sum(1 for char in value if not char.isspace())
+    cjk_dominant = bool(visible_count and cjk_count / visible_count >= 0.55)
+
+    if max_lines == 2 and len(lines) >= 2 and cjk_dominant:
+        balanced = balanced_cjk_two_lines(value, max_units)
+        if balanced:
+            lines = balanced
+
     if len(lines) > max_lines:
         lines = lines[:max_lines]
         last = lines[-1]
@@ -100,9 +186,7 @@ def wrap_text(value: str, width_px: float, font_size: float, max_lines: int) -> 
             last = last[:-1]
         lines[-1] = last.rstrip() + "…"
 
-    cjk_count = sum(1 for char in value if ord(char) >= 128)
-    visible_count = sum(1 for char in value if not char.isspace())
-    if len(lines) >= 2 and visible_count and cjk_count / visible_count >= 0.55:
+    if len(lines) >= 2 and cjk_dominant and max_lines != 2:
         target = max_units * 0.34
         previous = lines[-2]
         last = lines[-1]
@@ -211,7 +295,13 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
     serial = serial_for(profile)
     score = int(profile["match_score"])
     battery = int(profile["battery"])
-    battery_width = round(260 * battery / 100)
+    battery_track_width = 220
+    battery_width = round(battery_track_width * battery / 100)
+    battery_fill = (
+        f'<rect x="286" y="1514" width="{battery_width}" height="26" rx="13" fill="{accent}"/>'
+        if battery_width > 0
+        else ""
+    )
     confidence_map = {"low": "低样本", "medium": "中等", "high": "高"}
     confidence_label = confidence_map[profile["confidence"]]
     receipt_label, receipt_english, _ = receipt_copy(profile["confidence"])
@@ -219,7 +309,7 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
     tags = profile["signal_tags"]
     tag_widths = [max(126, min(176, 52 + len(str(tag)) * 28)) for tag in tags]
     tag_total = sum(tag_widths) + 24 * 2
-    tag_x = 837 - tag_total / 2
+    tag_x = 826 - tag_total / 2
     tag_parts = []
     for tag, tag_width in zip(tags, tag_widths):
         tag_parts.append(f'<rect x="{tag_x}" y="526" width="{tag_width}" height="52" rx="26" fill="{PAPER}" stroke="{INK}" stroke-width="5"/>')
@@ -227,10 +317,10 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
         tag_x += tag_width + 24
 
     evidence_parts = []
-    evidence_y = [949, 1002, 1055]
+    evidence_y = [952, 1004, 1056]
     for index, (value, y) in enumerate(zip(profile["evidence"], evidence_y), start=1):
         evidence_parts.extend([
-            f'<circle cx="126" cy="{y - 9}" r="21" fill="{INK}"/>',
+            f'<circle cx="126" cy="{y - 9}" r="20" fill="{INK}"/>',
             text_block(126, y - 1, 28, str(index), 20, 22, 1, 900, PAPER, "middle"),
             text_block(166, y, 930, str(value), 27, 32, 1, 700, INK),
         ])
@@ -261,8 +351,8 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
   <rect x="88" y="216" width="400" height="380" rx="34" fill="none" stroke="{INK}" stroke-width="8"/>
 
   <rect x="520" y="216" width="612" height="380" rx="36" fill="{accent}" stroke="{INK}" stroke-width="8"/>
-  <rect x="548" y="242" width="246" height="46" rx="23" fill="{INK}"/>
-  {text_block(671, 274, 218, '角色原型 · CHARACTER', 20, 24, 1, 800, PAPER, 'middle', 0.6)}
+  <rect x="548" y="242" width="272" height="46" rx="23" fill="{INK}"/>
+  {text_block(684, 274, 244, '角色原型 · CHARACTER', 20, 24, 1, 800, PAPER, 'middle', 0.6)}
   {text_block(548, 332, 430, str(profile['character_name']), 34, 42, 2, 800, INK)}
   <circle cx="1044" cy="312" r="62" fill="{PAPER}" stroke="{INK}" stroke-width="7"/>
   {text_block(1044, 307, 90, str(score), 42, 44, 1, 900, INK, 'middle')}
@@ -278,9 +368,9 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
   {text_block(122, 746, 966, '“' + str(profile['tagline']) + '”', 44, 52, 3, 900, INK)}
 
   <rect x="88" y="850" width="1044" height="232" rx="34" fill="{secondary_light}" stroke="{INK}" stroke-width="8"/>
-  <rect x="116" y="876" width="276" height="48" rx="24" fill="{INK}"/>
-  {text_block(254, 909, 250, receipt_label, 21, 24, 1, 850, PAPER, 'middle')}
-  {text_block(1104, 909, 280, receipt_english, 18, 22, 1, 750, INK, 'end', 1.2)}
+  <rect x="116" y="866" width="292" height="44" rx="22" fill="{INK}"/>
+  {text_block(262, 897, 264, receipt_label, 21, 24, 1, 850, PAPER, 'middle')}
+  {text_block(1104, 897, 280, receipt_english, 18, 22, 1, 750, INK, 'end', 1.2)}
   {''.join(evidence_parts)}
 
   {field_card(88, 1114, 510, 164, '打工模式', 'WORK MODE', str(profile['work_mode']), accent_light)}
@@ -289,15 +379,17 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
   {field_card(622, 1300, 510, 164, '本人声明', 'BOUNDARY LINE', str(profile['boundary_line']), accent_light)}
 
   <rect x="88" y="1490" width="1044" height="74" rx="30" fill="{INK}"/>
-  {text_block(118, 1538, 180, '今日剩余气泡', 22, 26, 1, 800, PAPER)}
-  <rect x="292" y="1512" width="260" height="28" rx="14" fill="{PAPER}" opacity="0.25"/>
-  <rect x="292" y="1512" width="{battery_width}" height="28" rx="14" fill="{accent}"/>
-  {text_block(574, 1538, 90, str(battery) + '%', 25, 28, 1, 900, PAPER, 'end')}
-  {text_block(670, 1538, 250, '本周已补过的锅', 22, 26, 1, 800, PAPER)}
+  {text_block(118, 1537, 156, '今日剩余气泡', 22, 26, 1, 800, PAPER)}
+  <rect x="286" y="1514" width="{battery_track_width}" height="26" rx="13" fill="{PAPER}" opacity="0.25"/>
+  {battery_fill}
+  <rect x="522" y="1506" width="82" height="42" rx="21" fill="{PAPER}"/>
+  {text_block(563, 1535, 62, str(battery) + '%', 23, 26, 1, 900, INK, 'middle')}
+  <line x1="636" y1="1508" x2="636" y2="1546" stroke="{PAPER}" stroke-width="2" opacity="0.22"/>
+  {text_block(676, 1538, 250, '本周已补过的锅', 22, 26, 1, 800, PAPER)}
   {text_block(1098, 1540, 150, str(profile['patch_count']) + ' 口', 27, 30, 1, 900, accent, 'end')}
 
-  {text_block(88, 1598, 740, disclaimer, 19, 22, 1, 650, INK)}
-  {text_block(1132, 1598, 260, '证据置信度：' + confidence_label, 19, 22, 1, 750, INK, 'end')}
+  {text_block(88, 1594, 740, disclaimer, 19, 22, 1, 650, INK)}
+  {text_block(1132, 1594, 260, '证据置信度：' + confidence_label, 19, 22, 1, 750, INK, 'end')}
 </svg>'''
     return svg
 

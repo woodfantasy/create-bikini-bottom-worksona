@@ -36,6 +36,12 @@ Aim for “collectible employee archive card,” not “children's party invitat
 
 Use short bilingual micro-labels only when they support the document-file aesthetic. Keep the meaningful copy in the user's primary language.
 
+Maintain component spacing as a layout invariant:
+
+- keep at least 12 px of clear space between the chat-receipt title pill and the first numbered badge;
+- render percentages in a fixed-width value capsule beside the progress track, never floating past the track edge;
+- keep at least 18 px between footer groups and use a divider when two statistics share one bar.
+
 ## Typography
 
 Use this system stack so the SVG remains portable:
@@ -52,6 +58,7 @@ Use this system stack so the SVG remains portable:
 - Use line height between 1.15 and 1.32.
 
 Do not use condensed novelty fonts for Chinese body text.
+Prefer punctuation-aware CJK line breaks. Do not begin a line with closing punctuation or split paired number expressions and common short compounds when another valid break exists.
 
 ## Avatar treatment
 
