@@ -30,7 +30,7 @@ The Skill is designed for playful self-expression, not psychological diagnosis. 
 
 | Capability | Result |
 | --- | --- |
-| Conversation evidence | Extracts 5–12 observable communication and work-style signals. |
+| Conversation evidence | Builds an internal ledger of 18–36 distinct signals from the largest authorized conversation corpus available, then selects three shareable receipts. |
 | Character mapping | Maps the signals to a SpongeBob/Bikini Bottom archetype with a score and confidence level. |
 | Worksona writing | Produces a title, tagline, three “chat receipts,” work mode, hidden skill, workplace wound, and boundary line. |
 | Social card | Renders a fixed 1242×1656 px (3:4) SVG and PNG layout for mobile sharing. |
@@ -106,15 +106,23 @@ Based only on the conversation visible in this chat, make me a funny but empathe
 Include the character match, three chat receipts, my hidden skill, workplace wound, and a quotable boundary line.
 ```
 
-If the visible evidence is sparse, the Skill asks for 10–30 representative messages or three short answers. You can also ask it to continue with a low-confidence draft.
+To maximize confidence, ask it to review every turn visible to the current host plus any history you explicitly authorize:
+
+```text
+Review the largest conversation corpus you are actually allowed to access—not just the latest messages.
+Build an 18–36-note internal evidence ledger across sessions, topics, and time periods; include my corrections and reactions to Agent replies.
+Report the inspected coverage, then compress the strongest recurring patterns into the three card receipts.
+```
+
+If the host exposes too little history, the Skill asks for permission to use its conversation search or for an export of roughly 20–60 representative interaction units. You can also ask it to continue with a clearly labeled low-confidence draft.
 
 The default workflow is:
 
-1. Establish what the current host can actually see.
-2. Extract repeated behavioral signals and rank the character roster.
+1. Establish the accessible corpus and report its session, topic, and time coverage.
+2. Read all available turns or use stratified sampling for a large corpus; extract and deduplicate 18–36 recurring behavioral signals.
 3. Write the standardized profile without diagnosing the user.
-4. Render the card and a “聊天记录把我卖了 / Chat receipts” share hook.
-5. Validate dimensions, readability, privacy, and rights mode before delivery.
+4. Compress the internal ledger into three “聊天记录把我卖了 / Chat receipts” share hooks.
+5. Validate dimensions, readability, privacy, rights mode, and evidence coverage before delivery.
 
 ## Local rendering
 
@@ -141,6 +149,8 @@ Every profile contains:
 - `work_mode`, `hidden_skill`, `workplace_wound`, and `boundary_line`;
 - playful battery and patch-count stats;
 - optional secondary character, avatar, image mode, and source note.
+
+The three `evidence` strings are card-sized share copy, not the amount of conversation analyzed. The fuller evidence ledger stays in temporary working notes and is never published with private source text; ask for an anonymized appendix when you want to inspect more of the reasoning.
 
 The complete schema and character guidance live in [`references/`](references/).
 

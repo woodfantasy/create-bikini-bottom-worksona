@@ -8,7 +8,7 @@ C’est un outil d’expression personnelle, pas un diagnostic psychologique. Il
 
 ## Fonctionnalités
 
-- Extrait 5 à 12 signaux observables de communication et de travail.
+- Constitue un registre interne de 18 à 36 signaux comportementaux distincts à partir du plus grand corpus autorisé, puis le résume en trois preuves partageables.
 - Choisit un personnage, un score de correspondance et un niveau de confiance.
 - Rédige un titre, une phrase à partager, trois « preuves du chat », le mode de travail, le talent caché, la blessure professionnelle et la limite personnelle.
 - Génère une carte SVG/PNG de 1242×1656 px (3:4), adaptée aux réseaux sociaux.
@@ -58,9 +58,9 @@ Associe-moi à un personnage de Bob l’éponge et ajoute trois preuves du chat,
 ma blessure au travail et une limite que j’aurai envie de partager.
 ```
 
-Si les preuves sont rares, fournissez 10 à 30 messages représentatifs ou répondez à trois questions courtes. Vous pouvez aussi demander une première version à faible confiance.
+Pour augmenter la confiance, demandez au Skill d’examiner tous les tours visibles par l’hôte et tout historique que vous autorisez explicitement. Il doit couvrir plusieurs sessions, thèmes et périodes, inclure vos corrections ou réactions aux réponses de l’agent et constituer un registre interne de 18 à 36 signaux. S’il manque de l’historique, autorisez la recherche de conversations ou fournissez environ 20 à 60 unités d’interaction représentatives. Vous pouvez aussi demander une première version à faible confiance.
 
-Le flux est : définir les preuves disponibles → extraire les signaux → choisir le personnage → rédiger la carte → générer l’image et la légende → vérifier format, confidentialité et droits.
+Le flux est : présenter le corpus accessible → lire tous les tours ou échantillonner par strates un grand corpus → enregistrer et dédupliquer 18 à 36 signaux → choisir le personnage → résumer trois preuves partageables → rédiger la carte → générer l’image et la légende → vérifier format, confidentialité, droits et couverture.
 
 ## Génération locale
 
