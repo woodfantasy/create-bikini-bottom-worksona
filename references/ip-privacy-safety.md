@@ -38,8 +38,7 @@ Never bundle:
 - official logos or franchise fonts;
 - image files whose license cannot be documented.
 
-The bundled example uses a neutral placeholder and must not imply endorsement.
-Replace it only with an original or rights-cleared avatar supplied for the specific profile.
+The bundled example includes one newly generated fan-expression avatar so the sample card can communicate its value at a glance. Keep it explicitly marked as `image_mode: fan`; it is unofficial, non-commercial sample material and must not imply endorsement, licensing, or commercial clearance. Use the neutral placeholder, original art, or rights-cleared art for other public or commercial outputs.
 
 ## Conversation privacy
 

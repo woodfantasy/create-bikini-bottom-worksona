@@ -1,7 +1,7 @@
 English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Português](README.pt.md) | [Français](README.fr.md)
 
 <p align="center">
-  <img src="assets/avatar-placeholder.svg" width="128" height="128" alt="Bikini Bottom Worksona placeholder avatar">
+  <img src="assets/spongebob-fan-avatar.png" width="128" height="128" alt="SpongeBob fan-art avatar">
 </p>
 
 <h1 align="center">Bikini Bottom Worksona</h1>
@@ -15,6 +15,12 @@ English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국�
   <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/spec-Agent%20Skills-79D9D4.svg" alt="Agent Skills specification"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-FF7B6B.svg" alt="MIT license"></a>
 </p>
+
+<p align="center">
+  <img src="assets/example-card.png" width="360" alt="Generated Bikini Bottom Worksona example card">
+</p>
+
+> See the result first: the repository ships a generated example card so the product value is visible before installation.
 
 Turn the conversation style visible to your agent into a standardized **Bikini Bottom-inspired worksona card**: a character mapping, a relatable workplace identity, a sharp repostable line, and a Xiaohongshu-ready caption.
 
@@ -144,7 +150,8 @@ The complete schema and character guidance live in [`references/`](references/).
 - Paraphrase evidence; do not publish verbatim private messages, names, employers, phone numbers, tokens, or other secrets.
 - Treat the result as entertainment and self-expression, never as a clinical or employment assessment.
 - This is an unofficial fan-expression project and is not affiliated with or endorsed by the SpongeBob rights holders.
-- Public or commercial visuals should use the bundled placeholder or a separately rights-cleared/original underwater workplace character. Do not add episode stills, scraped PNGs, marketplace screenshots, logos, franchise fonts, or third-party fan art.
+- This repository includes one newly generated SpongeBob fan-art avatar and sample card to make the product legible at a glance. They are unofficial, for personal/non-commercial fan expression, and do not imply affiliation, endorsement, or commercial clearance.
+- For commercial, paid, branded, or otherwise public-facing outputs, replace the fan avatar with original or rights-cleared art and set `image_mode` to `original` or `licensed`. Do not add episode stills, scraped PNGs, marketplace screenshots, logos, franchise fonts, or third-party fan art.
 
 ## Project structure
 
@@ -153,7 +160,7 @@ create-bikini-bottom-worksona/
 ├── SKILL.md                     # Agent instructions and workflow
 ├── README*.md                   # Multilingual documentation
 ├── agents/openai.yaml           # Codex display metadata
-├── assets/                      # Placeholder and validated sample card
+├── assets/                      # Fan-art sample avatar, fallback placeholder, and card
 ├── references/                  # Rubric, roster, schema, card, safety, sharing
 └── scripts/
     ├── install_skill.py         # Host installation helper
