@@ -1,8 +1,10 @@
 # Conversation Analysis Rubric
 
-## Evidence order
+## Evidence corpus and order
 
-Use evidence in this order:
+Use [conversation-sampling.md](conversation-sampling.md) to establish the accessible corpus before scoring. The internal ledger should contain 18–36 distinct observations when the corpus supports it; the profile's three `evidence` strings are only the final shareable compression.
+
+Within the accessible corpus, use evidence in this order:
 
 1. Repeated choices and corrections across multiple turns.
 2. How the user frames goals, constraints, risks, and quality.
@@ -29,7 +31,7 @@ Score each dimension from 0 to 4. Use `2` when evidence is mixed or absent.
 | expressiveness | restrained | context-dependent | vivid humor, emotion, identity language |
 | ease | urgency/strain | steady | relaxed, unhurried, low-friction |
 
-Record one short evidence note for every non-neutral score. Paraphrase private content instead of quoting it.
+Record one short, source-linked paraphrase for every non-neutral score. Prefer notes that recur across independent sessions or topics. Preserve conflicting evidence instead of averaging it away. Never publish verbatim private content.
 
 ## Rank characters
 
@@ -63,17 +65,19 @@ Apply these adjustments:
 
 | Confidence | Evidence |
 |---|---|
-| high | 12+ meaningful messages across at least 3 topics, with repeated signals |
-| medium | 5–11 messages or many messages from one narrow task |
-| low | fewer than 5 meaningful messages, mostly pasted content, or conflicting signals |
+| high | 24+ meaningful interaction units across 4+ topic groups and 3 time slices when available; 12+ ledger notes show repeated behavior and no unresolved major contradiction |
+| medium | 12–23 meaningful interaction units across 3+ topic groups, or 20+ units from one narrow topic; 8+ ledger notes with limited contradiction |
+| low | fewer than 12 meaningful interaction units, a single narrow task, mostly pasted content, inaccessible history, or unresolved conflicting signals |
 
-State the limitation in one line when confidence is low. Never hide uncertainty behind a high match score.
+State the inspected coverage and limitation in one line. Never hide uncertainty behind a high match score, and never treat a long single thread as equivalent to cross-session evidence.
 
 ## Quality check
 
 Before finalizing, verify that:
 
 - at least two evidence points describe behavior, not adjectives;
+- the internal ledger contains enough distinct, source-linked notes for the assigned confidence band;
+- supporting and conflicting patterns have both been considered;
 - the flattering strength and workplace wound are causally connected;
 - the result sounds like the user, not a generic horoscope;
 - the match would still make sense if the character name were temporarily hidden;

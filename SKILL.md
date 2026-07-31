@@ -12,28 +12,35 @@ Turn observable conversation behavior into a defensible character match and a po
 Read these files before drafting:
 
 - Read [references/analysis-rubric.md](references/analysis-rubric.md) and [references/character-roster.md](references/character-roster.md) for every analysis.
+- Read [references/conversation-sampling.md](references/conversation-sampling.md) when the host exposes multiple turns, searchable history, or a user-approved conversation export.
 - Read [references/profile-schema.md](references/profile-schema.md) and [references/card-spec.md](references/card-spec.md) before creating card data or visuals.
+- Read [references/avatar-system.md](references/avatar-system.md) before selecting, generating, or falling back to an avatar.
 - Read [references/ip-privacy-safety.md](references/ip-privacy-safety.md) before selecting or generating imagery.
 - Read [references/share-copy.md](references/share-copy.md) when the user wants Xiaohongshu copy, a carousel, or share hooks.
 - Read [references/installation.md](references/installation.md) only when installing, packaging, or publishing this Skill.
 
 ## Follow the workflow
 
-### 1. Establish the evidence boundary
+### 1. Establish the evidence boundary and corpus
 
-Use only conversation turns, memories, files, or history that the current host actually exposes. Never imply access to hidden chats, deleted content, private account history, or another app.
+Use the largest conversation corpus the current host actually exposes, not only the latest few messages. This may include every visible turn in the current thread, host-native conversation search results, or a user-approved export. Never imply access to hidden chats, deleted content, private account history, or another app.
 
-If the visible context contains at least five meaningful user messages, analyze it directly. If evidence is thin, ask for one of these inputs:
+First report the coverage you can actually inspect: number of interaction units, sessions or threads, topics, and time slices. An interaction unit is a user turn plus the relevant Agent reply and any user correction or acceptance. Read all available turns when the corpus is small; use the stratified sampling procedure in `references/conversation-sampling.md` when it is large.
 
-- 10–30 representative messages or a conversation export;
+When creating the profile, put a short privacy-safe coverage summary in optional `coverage_note` (for example, “当前线程 31 个互动单元，覆盖 4 类任务；未读取其他会话”). Never put names, source identifiers, or private quotes in this field.
+
+If the accessible corpus is too thin for a reliable result, ask for one of these inputs:
+
+- permission to use the host's conversation-search/history tool;
+- a user-approved export covering roughly 20–60 representative interaction units across several topics and time periods;
 - three short answers: “最常催 Agent 做什么？最受不了什么？最近替别人补过什么锅？”;
 - a user-approved folder or host-provided conversation-search tool.
 
-Continue with a low-confidence draft when the user prefers not to provide more context. Label the limitation plainly.
+Continue with a clearly labeled low-confidence draft when the user prefers not to provide more context. Do not silently fill missing history from assumptions.
 
 ### 2. Extract behavioral signals
 
-Collect 5–12 concise observations. Separate evidence from interpretation. Prefer repeated behaviors over isolated wording.
+Build an internal evidence ledger of **18–36 distinct behavioral observations** when the corpus supports it; do not inflate the count with near-duplicates. Each observation should be a paraphrase tied to a source unit, topic/time slice, observed behavior, rubric dimensions, recurrence count, and contradiction note. Weight repeated patterns across independent sessions or topics above one-off wording. The card still compresses this ledger into exactly three shareable chat receipts.
 
 Score the dimensions in the analysis rubric, rank the roster, and select:
 
@@ -50,7 +57,7 @@ Produce all required fields from the profile schema. Make each field do a differ
 
 - `worksona_title`: an instantly legible workplace identity;
 - `tagline`: the line users most want to repost;
-- `evidence`: three specific reasons the match feels earned;
+- `evidence`: three specific reasons selected from the larger internal ledger;
 - `work_mode`: how the user moves work forward;
 - `hidden_skill`: a flattering, concrete superpower;
 - `workplace_wound`: the recurring way reliability gets punished;
@@ -63,11 +70,11 @@ Write in the user's language unless asked otherwise. Match their humor intensity
 Apply the first suitable mode:
 
 1. **Licensed mode** — Use rights-cleared character art supplied by the user or their organization.
-2. **Personal fan-expression mode** — Use user-supplied imagery or a host image tool only for personal, non-commercial sharing; add the fan-made disclaimer.
+2. **Personal fan-expression mode** — Use user-supplied imagery or a host image tool only for personal, non-commercial sharing; add the fan-made disclaimer. Load `references/avatar-system.md` and personalize the prompt with the selected role's anchor, top signal tags, work mood, and one workplace prop.
 3. **Original archetype mode** — Default for public repositories, commercial work, or unclear rights. Use an original underwater office character and retain the textual character mapping separately.
-4. **Placeholder mode** — Use `assets/avatar-placeholder.svg` when no image tool or suitable asset is available.
+4. **No-image-tool fallback** — For personal fan-expression mode, set `image_mode` to `fan` and omit `avatar` to resolve `assets/default-avatars/<character_id>.png` deterministically. For public, commercial, or uncertain-rights work, use an approved original/licensed asset or explicit `placeholder` mode instead.
 
-Never copy marketplace screenshots, episode stills, logos, or third-party fan art into the Skill or public output repository.
+Never copy marketplace screenshots, episode stills, logos, or third-party fan art into the Skill or public output repository. The bundled default pack is newly generated, unofficial fan-expression art; it is not a rights grant.
 
 ### 5. Build and render
 
@@ -98,7 +105,8 @@ Check all of the following:
 - Confirm the image is 3:4 and, for PNG, exactly 1242×1656.
 - Confirm no text clips, overlaps, or falls outside the safe area.
 - Confirm the emotional line is readable at phone-thumbnail scale.
-- Confirm the three evidence points come from visible or user-provided context.
+- Confirm the three evidence points come from visible or user-provided context and are representative of the larger evidence ledger.
+- State the inspected coverage and confidence limitation in the handoff; do not equate message volume with certainty.
 - Confirm the result does not reveal secrets, names, phone numbers, employer details, or verbatim private messages unless the user explicitly approved them.
 - Confirm official character imagery is used only in a rights-appropriate mode.
 - Confirm the card includes a low-key non-affiliation disclaimer when required.
@@ -112,8 +120,9 @@ Return:
 1. the primary card image (`PNG` when available, otherwise `SVG`);
 2. the normalized profile JSON;
 3. the Xiaohongshu-ready caption;
-4. a two-sentence explanation of the match and confidence;
-5. an invitation to “重抽一次” using the secondary character or a different humor intensity.
+4. a two-sentence explanation of the match, inspected coverage, and confidence;
+5. an invitation to “重抽一次” using the secondary character or a different humor intensity;
+6. an anonymized evidence appendix only when the user asks for more detail, with private source text and source identifiers removed.
 
 Avoid exposing internal scoring tables unless the user asks. Never call the result a scientific assessment.
 

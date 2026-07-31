@@ -15,7 +15,7 @@ Save UTF-8 JSON. Reject unknown structured objects, but allow optional scalar fi
 | `match_score` | integer | 55–97 | playful match strength |
 | `confidence` | string | `low`, `medium`, `high` | evidence quality |
 | `tagline` | string | max 42 CJK or 84 Latin chars | repostable emotional line |
-| `evidence` | array[string] | exactly 3; each max 30 CJK or 60 Latin chars | three chat receipts that make the match feel earned |
+| `evidence` | array[string] | exactly 3; each max 30 CJK or 60 Latin chars | three shareable chat receipts selected from a larger internal evidence ledger |
 | `work_mode` | string | max 34 CJK or 68 Latin chars | recurring work behavior |
 | `hidden_skill` | string | max 34 CJK or 68 Latin chars | concrete strength |
 | `workplace_wound` | string | max 34 CJK or 68 Latin chars | the way reliability gets punished |
@@ -34,6 +34,7 @@ Save UTF-8 JSON. Reject unknown structured objects, but allow optional scalar fi
 | `accent` | string | `#RRGGBB`; overrides roster accent |
 | `secondary` | string | `#RRGGBB`; overrides roster secondary |
 | `source_note` | string | short evidence limitation, not private quotes |
+| `coverage_note` | string | short, privacy-safe summary of inspected conversation coverage |
 | `image_mode` | string | `licensed`, `fan`, `original`, or `placeholder` |
 | `share_title` | string | optional Xiaohongshu title |
 | `share_hook` | string | optional first line of caption |
@@ -69,3 +70,7 @@ Save UTF-8 JSON. Reject unknown structured objects, but allow optional scalar fi
 ```
 
 Run `python3 scripts/validate_profile.py <profile.json>` before rendering.
+
+When `image_mode` is `fan` and `avatar` is omitted, the renderer resolves `assets/default-avatars/<character_id>.png`. This deterministic fallback is intentionally separate from the explicit `placeholder` mode.
+
+The `evidence` field is intentionally limited to three card-sized receipts for readability. It is **not** the extraction limit: keep the fuller 18–36-note evidence ledger in temporary analysis notes, with source coverage and contradictions, and never publish private source text in the profile or caption.

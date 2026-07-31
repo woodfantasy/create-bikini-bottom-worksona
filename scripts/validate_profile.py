@@ -58,6 +58,7 @@ TEXT_LIMITS = {
     "secondary_character": 30,
     "serial": 32,
     "source_note": 120,
+    "coverage_note": 160,
     "share_title": 80,
     "share_hook": 120,
 }
@@ -159,6 +160,7 @@ def validate_profile(data: dict[str, Any]) -> list[str]:
             "accent",
             "secondary",
             "source_note",
+            "coverage_note",
             "image_mode",
             "share_title",
             "share_hook",

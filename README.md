@@ -1,9 +1,5 @@
 English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국어](README.ko.md) | [Español](README.es.md) | [Português](README.pt.md) | [Français](README.fr.md)
 
-<p align="center">
-  <img src="assets/avatar-placeholder.svg" width="128" height="128" alt="Bikini Bottom Worksona placeholder avatar">
-</p>
-
 <h1 align="center">Bikini Bottom Worksona</h1>
 
 <p align="center">
@@ -16,6 +12,18 @@ English | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) | [한국�
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-FF7B6B.svg" alt="MIT license"></a>
 </p>
 
+<p align="center">
+  <img src="assets/example-card.png" width="500" alt="A generated Bikini Bottom Worksona 3:4 card">
+</p>
+
+<p align="center"><strong>Real output, not a mockup:</strong> a conversation becomes a shareable worksona card.</p>
+
+<p align="center">
+  <img src="assets/default-avatars/spongebob.png" width="180" height="180" alt="Role-matched SpongeBob worksona avatar">
+</p>
+
+<p align="center"><em>Role-matched default avatar for hosts without an image tool.</em></p>
+
 Turn the conversation style visible to your agent into a standardized **Bikini Bottom-inspired worksona card**: a character mapping, a relatable workplace identity, a sharp repostable line, and a Xiaohongshu-ready caption.
 
 The Skill is designed for playful self-expression, not psychological diagnosis. It only analyzes conversation content that the current host actually exposes.
@@ -24,12 +32,12 @@ The Skill is designed for playful self-expression, not psychological diagnosis. 
 
 | Capability | Result |
 | --- | --- |
-| Conversation evidence | Extracts 5–12 observable communication and work-style signals. |
+| Conversation evidence | Builds an internal ledger of 18–36 distinct signals from the largest authorized conversation corpus available, then selects three shareable receipts. |
 | Character mapping | Maps the signals to a SpongeBob/Bikini Bottom archetype with a score and confidence level. |
 | Worksona writing | Produces a title, tagline, three “chat receipts,” work mode, hidden skill, workplace wound, and boundary line. |
 | Social card | Renders a fixed 1242×1656 px (3:4) SVG and PNG layout for mobile sharing. |
 | Share copy | Writes a copy-paste Markdown caption with hooks and hashtags. |
-| Safety | Uses paraphrases, avoids sensitive inferences, and defaults public visuals to an original archetype or placeholder. |
+| Safety | Uses paraphrases, avoids sensitive inferences, and defaults public visuals to an original archetype or placeholder; personal fan mode includes role-matched default avatars. |
 
 ## Quick start
 
@@ -100,15 +108,23 @@ Based only on the conversation visible in this chat, make me a funny but empathe
 Include the character match, three chat receipts, my hidden skill, workplace wound, and a quotable boundary line.
 ```
 
-If the visible evidence is sparse, the Skill asks for 10–30 representative messages or three short answers. You can also ask it to continue with a low-confidence draft.
+To maximize confidence, ask it to review every turn visible to the current host plus any history you explicitly authorize:
+
+```text
+Review the largest conversation corpus you are actually allowed to access—not just the latest messages.
+Build an 18–36-note internal evidence ledger across sessions, topics, and time periods; include my corrections and reactions to Agent replies.
+Report the inspected coverage, then compress the strongest recurring patterns into the three card receipts.
+```
+
+If the host exposes too little history, the Skill asks for permission to use its conversation search or for an export of roughly 20–60 representative interaction units. You can also ask it to continue with a clearly labeled low-confidence draft.
 
 The default workflow is:
 
-1. Establish what the current host can actually see.
-2. Extract repeated behavioral signals and rank the character roster.
+1. Establish the accessible corpus and report its session, topic, and time coverage.
+2. Read all available turns or use stratified sampling for a large corpus; extract and deduplicate 18–36 recurring behavioral signals.
 3. Write the standardized profile without diagnosing the user.
-4. Render the card and a “聊天记录把我卖了 / Chat receipts” share hook.
-5. Validate dimensions, readability, privacy, and rights mode before delivery.
+4. Compress the internal ledger into three “聊天记录把我卖了 / Chat receipts” share hooks.
+5. Validate dimensions, readability, privacy, rights mode, and evidence coverage before delivery.
 
 ## Local rendering
 
@@ -134,7 +150,9 @@ Every profile contains:
 - three evidence-based `evidence` items, written as chat receipts;
 - `work_mode`, `hidden_skill`, `workplace_wound`, and `boundary_line`;
 - playful battery and patch-count stats;
-- optional secondary character, avatar, image mode, and source note.
+- optional secondary character, avatar, image mode, source note, and privacy-safe coverage note.
+
+The three `evidence` strings are card-sized share copy, not the amount of conversation analyzed. The fuller evidence ledger stays in temporary working notes and is never published with private source text; ask for an anonymized appendix when you want to inspect more of the reasoning.
 
 The complete schema and character guidance live in [`references/`](references/).
 
@@ -144,7 +162,9 @@ The complete schema and character guidance live in [`references/`](references/).
 - Paraphrase evidence; do not publish verbatim private messages, names, employers, phone numbers, tokens, or other secrets.
 - Treat the result as entertainment and self-expression, never as a clinical or employment assessment.
 - This is an unofficial fan-expression project and is not affiliated with or endorsed by the SpongeBob rights holders.
-- Public or commercial visuals should use the bundled placeholder or a separately rights-cleared/original underwater workplace character. Do not add episode stills, scraped PNGs, marketplace screenshots, logos, franchise fonts, or third-party fan art.
+- This repository includes one newly generated SpongeBob fan-art avatar and sample card to make the product legible at a glance. They are unofficial, for personal/non-commercial fan expression, and do not imply affiliation, endorsement, or commercial clearance.
+- Personal fan mode includes a generated default avatar for every roster role; when no image tool is available, the renderer selects `assets/default-avatars/<character_id>.png` instead of the neutral placeholder.
+- For commercial, paid, branded, or otherwise public-facing outputs, replace the fan avatar with original or rights-cleared art and set `image_mode` to `original` or `licensed`. Do not add episode stills, scraped PNGs, marketplace screenshots, logos, franchise fonts, or third-party fan art.
 
 ## Project structure
 
@@ -153,13 +173,14 @@ create-bikini-bottom-worksona/
 ├── SKILL.md                     # Agent instructions and workflow
 ├── README*.md                   # Multilingual documentation
 ├── agents/openai.yaml           # Codex display metadata
-├── assets/                      # Placeholder and validated sample card
-├── references/                  # Rubric, roster, schema, card, safety, sharing
+├── assets/                      # Sample avatar, 12-role default pack, placeholder, and card
+├── references/                  # Rubric, roster, avatar system, schema, card, safety, sharing
 └── scripts/
     ├── install_skill.py         # Host installation helper
     ├── package_skill.py         # Claude-compatible ZIP builder
     ├── render_card.py           # SVG/PNG/caption renderer
-    └── validate_profile.py      # Stdlib-only JSON validator
+    ├── validate_profile.py      # Stdlib-only JSON validator
+    └── validate_avatar_pack.py  # 12-role fallback asset validator
 ```
 
 ## Validate and package
@@ -167,6 +188,7 @@ create-bikini-bottom-worksona/
 ```bash
 python3 /path/to/skill-creator/scripts/quick_validate.py .
 skills-ref validate "$(pwd)"
+python3 scripts/validate_avatar_pack.py
 python3 scripts/package_skill.py --output /tmp/create-bikini-bottom-worksona.zip
 unzip -t /tmp/create-bikini-bottom-worksona.zip
 ```

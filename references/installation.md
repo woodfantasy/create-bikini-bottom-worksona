@@ -63,6 +63,7 @@ Run both validators:
 ```bash
 python3 /path/to/skill-creator/scripts/quick_validate.py .
 skills-ref validate "$(pwd)"
+python3 scripts/validate_avatar_pack.py
 ```
 
 Run the second command only when `skills-ref` is installed. Also test one direct trigger, one indirect trigger, one sparse-context request, and one unrelated request that should not activate the Skill.

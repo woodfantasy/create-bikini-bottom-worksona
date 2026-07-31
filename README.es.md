@@ -8,7 +8,7 @@ Es una herramienta de autoexpresión, no un diagnóstico psicológico. Solo anal
 
 ## Funciones
 
-- Extrae entre 5 y 12 señales observables de comunicación y trabajo.
+- Construye un registro interno de 18–36 señales de comportamiento distintas a partir del mayor corpus autorizado y después lo resume en tres pruebas compartibles.
 - Elige un personaje, una puntuación de coincidencia y un nivel de confianza.
 - Escribe título, frase para compartir, tres “recibos del chat”, modo de trabajo, habilidad oculta, herida laboral y límite personal.
 - Genera una tarjeta SVG/PNG de 1242×1656 px (3:4), lista para redes.
@@ -58,9 +58,9 @@ Asígnamela a un personaje de Bob Esponja e incluye tres recibos del chat, mi ha
 mi herida laboral y una frase límite que quiera compartir.
 ```
 
-Si hay poca evidencia, aporta 10–30 mensajes representativos o responde tres preguntas breves. También puedes pedir un borrador con confianza baja.
+Para aumentar la confianza, pide que revise todos los turnos visibles para el host y cualquier historial que autorices explícitamente. Debe cubrir varias sesiones, temas y periodos, incluir tus correcciones o reacciones a las respuestas del agente y crear un registro interno de 18–36 señales. Si falta historial, autoriza la búsqueda de conversaciones o aporta unas 20–60 unidades de interacción representativas. También puedes pedir un borrador con confianza baja.
 
-El flujo es: delimitar la evidencia → extraer señales → elegir personaje → escribir la tarjeta → generar imagen y texto → revisar tamaño, privacidad y derechos.
+El flujo es: informar del corpus accesible → leer todos los turnos o muestrear por estratos un corpus grande → registrar 18–36 señales y deduplicarlas → elegir personaje → resumir tres pruebas compartibles → escribir la tarjeta → generar imagen y texto → revisar tamaño, privacidad, derechos y cobertura.
 
 ## Generación local
 

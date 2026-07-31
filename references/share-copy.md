@@ -14,7 +14,7 @@ Lead with identity and emotion, not the rendering technology. The most shareable
 
 Keep titles concise and natural. Adapt, do not copy mechanically:
 
-- Agent 看完聊天记录，说我是「深海全自动补锅机」
+- Agent 根据当前可见对话，说我是「深海全自动补锅机」
 - 原来我的打工人格不是卷，是海绵宝宝型兜底
 - 努力工作的人，为什么最后总在补别人的锅
 - 被 Agent 做成章鱼哥人设卡后，我沉默了
@@ -25,7 +25,7 @@ Avoid absolute claims such as “100% accurate,” “scientific,” or “AI kn
 ## Caption template
 
 ```text
-让 Agent 翻完我这段时间的聊天，它给我的打工人格是：{worksona_title}。
+这次只让 Agent 根据{coverage_note 或“当前可见、且我明确授权的对话”}来判断，它给我的打工人格是：{worksona_title}。
 
 最扎心的不是像 {character_name}，而是这句：
 “{tagline}”
@@ -41,7 +41,7 @@ Avoid absolute claims such as “100% accurate,” “scientific,” or “AI kn
 本人现在决定把这句贴在工位上：
 “{boundary_line}”
 
-你觉得自己更像谁？要不要也让 Agent 翻一下聊天记录。
+你觉得自己更像谁？要不要也让 Agent 根据你授权的对话翻一下？
 
 #打工人 #人设卡 #AgentSkills #职场情绪 #海底打工人格
 ```

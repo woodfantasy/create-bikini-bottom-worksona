@@ -8,7 +8,7 @@ Transforme o estilo de conversa visível para o seu agente em um card de persona
 
 ## Recursos
 
-- Extrai 5–12 sinais observáveis de comunicação e trabalho.
+- Cria um registro interno de 18–36 sinais comportamentais distintos a partir do maior corpus autorizado e depois o resume em três provas compartilháveis.
 - Escolhe personagem, pontuação de correspondência e nível de confiança.
 - Escreve título, frase compartilhável, três “recibos do chat”, modo de trabalho, habilidade oculta, ferida profissional e limite pessoal.
 - Gera card SVG/PNG de 1242×1656 px (3:4), pronto para redes sociais.
@@ -58,9 +58,9 @@ Associe-me a um personagem de Bob Esponja e inclua três recibos do chat, minha 
 minha ferida no trabalho e uma frase de limite que eu queira compartilhar.
 ```
 
-Com pouca evidência, forneça 10–30 mensagens representativas ou responda a três perguntas curtas. Também é possível pedir um rascunho com baixa confiança.
+Para aumentar a confiança, peça que o Skill revise todos os turnos visíveis ao host e qualquer histórico que você autorizar explicitamente. Ele deve cobrir várias sessões, temas e períodos, incluir suas correções ou reações às respostas do agente e criar um registro interno de 18–36 sinais. Se faltar histórico, autorize a busca de conversas ou forneça cerca de 20–60 unidades de interação representativas. Também é possível pedir um rascunho com baixa confiança.
 
-O fluxo é: delimitar evidências → extrair sinais → escolher personagem → escrever o card → gerar imagem e legenda → revisar tamanho, privacidade e direitos.
+O fluxo é: informar o corpus acessível → ler todos os turnos ou fazer amostragem estratificada de um corpus grande → registrar e deduplicar 18–36 sinais → escolher personagem → resumir três provas compartilháveis → escrever o card → gerar imagem e legenda → revisar tamanho, privacidade, direitos e cobertura.
 
 ## Geração local
 
