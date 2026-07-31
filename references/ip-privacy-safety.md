@@ -38,7 +38,7 @@ Never bundle:
 - official logos or franchise fonts;
 - image files whose license cannot be documented.
 
-The bundled example includes one newly generated fan-expression avatar so the sample card can communicate its value at a glance. Keep it explicitly marked as `image_mode: fan`; it is unofficial, non-commercial sample material and must not imply endorsement, licensing, or commercial clearance. Use the neutral placeholder, original art, or rights-cleared art for other public or commercial outputs.
+The bundled example and `assets/default-avatars/` pack use newly generated fan-expression art so personal cards remain expressive even when the host has no image tool. Keep these assets explicitly under `image_mode: fan`; they are unofficial, non-commercial sample material and must not imply endorsement, licensing, or commercial clearance. Use the neutral placeholder, original art, or rights-cleared art for other public or commercial outputs.
 
 ## Conversation privacy
 

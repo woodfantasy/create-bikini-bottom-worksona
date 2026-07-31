@@ -223,7 +223,29 @@ def text_block(
     return "".join(rows)
 
 
-def resolve_avatar(profile_path: Path, avatar_value: str | None, skill_root: Path) -> Path:
+DEFAULT_AVATAR_IDS = {
+    "spongebob",
+    "squidward",
+    "patrick",
+    "sandy",
+    "mr-krabs",
+    "plankton",
+    "karen",
+    "gary",
+    "mrs-puff",
+    "pearl",
+    "larry",
+    "bubble-bass",
+}
+
+
+def resolve_avatar(
+    profile_path: Path,
+    avatar_value: str | None,
+    skill_root: Path,
+    character_id: str | None = None,
+    image_mode: str = "placeholder",
+) -> Path:
     candidates: list[Path] = []
     if avatar_value:
         raw = Path(avatar_value).expanduser()
@@ -236,6 +258,8 @@ def resolve_avatar(profile_path: Path, avatar_value: str | None, skill_root: Pat
                 skill_root / "assets" / raw,
                 Path.cwd() / raw,
             ])
+    if image_mode == "fan" and character_id in DEFAULT_AVATAR_IDS:
+        candidates.append(skill_root / "assets" / "default-avatars" / f"{character_id}.png")
     candidates.append(skill_root / "assets" / "avatar-placeholder.svg")
     for candidate in candidates:
         if candidate.is_file():
@@ -290,7 +314,13 @@ def build_svg(profile: dict[str, Any], profile_path: Path, skill_root: Path) -> 
         "placeholder": "人格娱乐内容 · 角色图为中性占位",
     }.get(image_mode, "人格娱乐内容 · 非科学测评")
 
-    avatar_path = resolve_avatar(profile_path, profile.get("avatar"), skill_root)
+    avatar_path = resolve_avatar(
+        profile_path,
+        profile.get("avatar"),
+        skill_root,
+        str(profile.get("character_id", "")),
+        str(image_mode),
+    )
     avatar_uri = data_uri(avatar_path)
     serial = serial_for(profile)
     score = int(profile["match_score"])

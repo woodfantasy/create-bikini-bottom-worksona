@@ -35,7 +35,7 @@ The Skill is designed for playful self-expression, not psychological diagnosis. 
 | Worksona writing | Produces a title, tagline, three “chat receipts,” work mode, hidden skill, workplace wound, and boundary line. |
 | Social card | Renders a fixed 1242×1656 px (3:4) SVG and PNG layout for mobile sharing. |
 | Share copy | Writes a copy-paste Markdown caption with hooks and hashtags. |
-| Safety | Uses paraphrases, avoids sensitive inferences, and defaults public visuals to an original archetype or placeholder. |
+| Safety | Uses paraphrases, avoids sensitive inferences, and defaults public visuals to an original archetype or placeholder; personal fan mode includes role-matched default avatars. |
 
 ## Quick start
 
@@ -161,6 +161,7 @@ The complete schema and character guidance live in [`references/`](references/).
 - Treat the result as entertainment and self-expression, never as a clinical or employment assessment.
 - This is an unofficial fan-expression project and is not affiliated with or endorsed by the SpongeBob rights holders.
 - This repository includes one newly generated SpongeBob fan-art avatar and sample card to make the product legible at a glance. They are unofficial, for personal/non-commercial fan expression, and do not imply affiliation, endorsement, or commercial clearance.
+- Personal fan mode includes a generated default avatar for every roster role; when no image tool is available, the renderer selects `assets/default-avatars/<character_id>.png` instead of the neutral placeholder.
 - For commercial, paid, branded, or otherwise public-facing outputs, replace the fan avatar with original or rights-cleared art and set `image_mode` to `original` or `licensed`. Do not add episode stills, scraped PNGs, marketplace screenshots, logos, franchise fonts, or third-party fan art.
 
 ## Project structure
@@ -170,13 +171,14 @@ create-bikini-bottom-worksona/
 ├── SKILL.md                     # Agent instructions and workflow
 ├── README*.md                   # Multilingual documentation
 ├── agents/openai.yaml           # Codex display metadata
-├── assets/                      # Fan-art sample avatar, fallback placeholder, and card
-├── references/                  # Rubric, roster, schema, card, safety, sharing
+├── assets/                      # Sample avatar, 12-role default pack, placeholder, and card
+├── references/                  # Rubric, roster, avatar system, schema, card, safety, sharing
 └── scripts/
     ├── install_skill.py         # Host installation helper
     ├── package_skill.py         # Claude-compatible ZIP builder
     ├── render_card.py           # SVG/PNG/caption renderer
-    └── validate_profile.py      # Stdlib-only JSON validator
+    ├── validate_profile.py      # Stdlib-only JSON validator
+    └── validate_avatar_pack.py  # 12-role fallback asset validator
 ```
 
 ## Validate and package
@@ -184,6 +186,7 @@ create-bikini-bottom-worksona/
 ```bash
 python3 /path/to/skill-creator/scripts/quick_validate.py .
 skills-ref validate "$(pwd)"
+python3 scripts/validate_avatar_pack.py
 python3 scripts/package_skill.py --output /tmp/create-bikini-bottom-worksona.zip
 unzip -t /tmp/create-bikini-bottom-worksona.zip
 ```

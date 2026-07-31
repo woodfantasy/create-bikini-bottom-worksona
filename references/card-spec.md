@@ -65,7 +65,7 @@ Prefer punctuation-aware CJK line breaks. Do not begin a line with closing punct
 - Use a 4:3 or square crop inside a thick outlined window.
 - Keep faces and key gestures away from the crop boundary.
 - Add no text inside generated avatars.
-- Use `assets/avatar-placeholder.svg` when art is unavailable.
+- In personal fan-expression mode, use `assets/default-avatars/<character_id>.png` when art or an image tool is unavailable; use `assets/avatar-placeholder.svg` only for explicit placeholder mode or rights-sensitive fallback.
 - The bundled sample profile uses `assets/spongebob-fan-avatar.png` in explicit personal fan-expression mode; the placeholder remains the safe fallback.
 - Never reuse the fan-expression sample avatar for commercial, paid, branded, or otherwise rights-sensitive outputs.
 - Treat official character images according to `ip-privacy-safety.md`.

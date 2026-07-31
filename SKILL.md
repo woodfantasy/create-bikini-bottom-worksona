@@ -14,6 +14,7 @@ Read these files before drafting:
 - Read [references/analysis-rubric.md](references/analysis-rubric.md) and [references/character-roster.md](references/character-roster.md) for every analysis.
 - Read [references/conversation-sampling.md](references/conversation-sampling.md) when the host exposes multiple turns, searchable history, or a user-approved conversation export.
 - Read [references/profile-schema.md](references/profile-schema.md) and [references/card-spec.md](references/card-spec.md) before creating card data or visuals.
+- Read [references/avatar-system.md](references/avatar-system.md) before selecting, generating, or falling back to an avatar.
 - Read [references/ip-privacy-safety.md](references/ip-privacy-safety.md) before selecting or generating imagery.
 - Read [references/share-copy.md](references/share-copy.md) when the user wants Xiaohongshu copy, a carousel, or share hooks.
 - Read [references/installation.md](references/installation.md) only when installing, packaging, or publishing this Skill.
@@ -69,11 +70,11 @@ Write in the user's language unless asked otherwise. Match their humor intensity
 Apply the first suitable mode:
 
 1. **Licensed mode** — Use rights-cleared character art supplied by the user or their organization.
-2. **Personal fan-expression mode** — Use user-supplied imagery or a host image tool only for personal, non-commercial sharing; add the fan-made disclaimer.
+2. **Personal fan-expression mode** — Use user-supplied imagery or a host image tool only for personal, non-commercial sharing; add the fan-made disclaimer. Load `references/avatar-system.md` and personalize the prompt with the selected role's anchor, top signal tags, work mood, and one workplace prop.
 3. **Original archetype mode** — Default for public repositories, commercial work, or unclear rights. Use an original underwater office character and retain the textual character mapping separately.
-4. **Placeholder mode** — Use `assets/avatar-placeholder.svg` when no image tool or suitable asset is available.
+4. **No-image-tool fallback** — For personal fan-expression mode, set `image_mode` to `fan` and omit `avatar` to resolve `assets/default-avatars/<character_id>.png` deterministically. For public, commercial, or uncertain-rights work, use an approved original/licensed asset or explicit `placeholder` mode instead.
 
-Never copy marketplace screenshots, episode stills, logos, or third-party fan art into the Skill or public output repository.
+Never copy marketplace screenshots, episode stills, logos, or third-party fan art into the Skill or public output repository. The bundled default pack is newly generated, unofficial fan-expression art; it is not a rights grant.
 
 ### 5. Build and render
 
