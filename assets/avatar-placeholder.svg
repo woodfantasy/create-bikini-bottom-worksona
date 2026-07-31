@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 960 960">
+  <defs>
+    <pattern id="dots" width="42" height="42" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="5" fill="#15333A" opacity="0.11"/>
+    </pattern>
+  </defs>
+  <rect width="960" height="960" rx="96" fill="#79D9D4"/>
+  <rect width="960" height="960" rx="96" fill="url(#dots)"/>
+  <circle cx="480" cy="390" r="190" fill="#FBF6E8" stroke="#15333A" stroke-width="24"/>
+  <path d="M290 735c38-132 134-205 190-205s152 73 190 205" fill="#FFD84D" stroke="#15333A" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="410" cy="360" r="22" fill="#15333A"/>
+  <circle cx="550" cy="360" r="22" fill="#15333A"/>
+  <path d="M398 455c49 43 115 43 164 0" fill="none" stroke="#15333A" stroke-width="22" stroke-linecap="round"/>
+  <rect x="236" y="775" width="488" height="92" rx="46" fill="#15333A"/>
+  <text x="480" y="837" text-anchor="middle" fill="#FBF6E8" font-size="34" font-weight="800" font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, Arial, sans-serif">放入已授权头像</text>
+</svg>

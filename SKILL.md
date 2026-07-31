@@ -1,0 +1,122 @@
+---
+name: create-bikini-bottom-worksona
+description: Analyze a user's visible conversation style, work habits, and self-described personality; map the evidence to a SpongeBob/Bikini Bottom character archetype; and create a standardized, funny, empathetic worksona card plus Xiaohongshu-ready sharing copy. Use when users ask for a personality card, 人设卡, 打工人格, 海绵宝宝角色匹配, conversation-style analysis, social share card, or a visual that expresses being hardworking, overworked, unfairly blamed, or repeatedly asked to clean up other people's messes.
+---
+
+# Create Bikini Bottom Worksona
+
+Turn observable conversation behavior into a defensible character match and a polished 3:4 social card. Keep the result playful and emotionally accurate without presenting it as psychological diagnosis.
+
+## Load the right references
+
+Read these files before drafting:
+
+- Read [references/analysis-rubric.md](references/analysis-rubric.md) and [references/character-roster.md](references/character-roster.md) for every analysis.
+- Read [references/profile-schema.md](references/profile-schema.md) and [references/card-spec.md](references/card-spec.md) before creating card data or visuals.
+- Read [references/ip-privacy-safety.md](references/ip-privacy-safety.md) before selecting or generating imagery.
+- Read [references/share-copy.md](references/share-copy.md) when the user wants Xiaohongshu copy, a carousel, or share hooks.
+- Read [references/installation.md](references/installation.md) only when installing, packaging, or publishing this Skill.
+
+## Follow the workflow
+
+### 1. Establish the evidence boundary
+
+Use only conversation turns, memories, files, or history that the current host actually exposes. Never imply access to hidden chats, deleted content, private account history, or another app.
+
+If the visible context contains at least five meaningful user messages, analyze it directly. If evidence is thin, ask for one of these inputs:
+
+- 10–30 representative messages or a conversation export;
+- three short answers: “最常催 Agent 做什么？最受不了什么？最近替别人补过什么锅？”;
+- a user-approved folder or host-provided conversation-search tool.
+
+Continue with a low-confidence draft when the user prefers not to provide more context. Label the limitation plainly.
+
+### 2. Extract behavioral signals
+
+Collect 5–12 concise observations. Separate evidence from interpretation. Prefer repeated behaviors over isolated wording.
+
+Score the dimensions in the analysis rubric, rank the roster, and select:
+
+- one primary character;
+- one optional secondary character when the top two scores are close;
+- a 0–100 match score rounded to a whole number;
+- a confidence label: `low`, `medium`, or `high`.
+
+Do not infer protected or sensitive traits. Do not diagnose mental health, intelligence, disability, or workplace performance.
+
+### 3. Write the worksona
+
+Produce all required fields from the profile schema. Make each field do a different job:
+
+- `worksona_title`: an instantly legible workplace identity;
+- `tagline`: the line users most want to repost;
+- `evidence`: three specific reasons the match feels earned;
+- `work_mode`: how the user moves work forward;
+- `hidden_skill`: a flattering, concrete superpower;
+- `workplace_wound`: the recurring way reliability gets punished;
+- `boundary_line`: a quotable boundary, not generic advice.
+
+Write in the user's language unless asked otherwise. Match their humor intensity, but never humiliate them. Keep every card field within the character limits in the schema.
+
+### 4. Choose an image mode
+
+Apply the first suitable mode:
+
+1. **Licensed mode** — Use rights-cleared character art supplied by the user or their organization.
+2. **Personal fan-expression mode** — Use user-supplied imagery or a host image tool only for personal, non-commercial sharing; add the fan-made disclaimer.
+3. **Original archetype mode** — Default for public repositories, commercial work, or unclear rights. Use an original underwater office character and retain the textual character mapping separately.
+4. **Placeholder mode** — Use `assets/avatar-placeholder.svg` when no image tool or suitable asset is available.
+
+Never copy marketplace screenshots, episode stills, logos, or third-party fan art into the Skill or public output repository.
+
+### 5. Build and render
+
+Create a clean output directory outside the Skill folder. Save the normalized data as `worksona-profile.json`.
+
+Validate it:
+
+```bash
+python3 scripts/validate_profile.py worksona-profile.json
+```
+
+Render the card and sharing caption:
+
+```bash
+python3 scripts/render_card.py \
+  --input worksona-profile.json \
+  --output worksona-card.svg \
+  --png worksona-card.png \
+  --caption worksona-caption.md
+```
+
+Treat SVG as the portable source of truth. The renderer exports PNG when a supported local rasterizer is available. If PNG export is unavailable, deliver the SVG and use the host's browser, screenshot, or image tool to rasterize it at 1242×1656.
+
+### 6. Verify before delivery
+
+Check all of the following:
+
+- Confirm the image is 3:4 and, for PNG, exactly 1242×1656.
+- Confirm no text clips, overlaps, or falls outside the safe area.
+- Confirm the emotional line is readable at phone-thumbnail scale.
+- Confirm the three evidence points come from visible or user-provided context.
+- Confirm the result does not reveal secrets, names, phone numbers, employer details, or verbatim private messages unless the user explicitly approved them.
+- Confirm official character imagery is used only in a rights-appropriate mode.
+- Confirm the card includes a low-key non-affiliation disclaimer when required.
+
+Revise once when any check fails.
+
+## Deliver the result
+
+Return:
+
+1. the primary card image (`PNG` when available, otherwise `SVG`);
+2. the normalized profile JSON;
+3. the Xiaohongshu-ready caption;
+4. a two-sentence explanation of the match and confidence;
+5. an invitation to “重抽一次” using the secondary character or a different humor intensity.
+
+Avoid exposing internal scoring tables unless the user asks. Never call the result a scientific assessment.
+
+## Example request
+
+> 分析我在这段对话里的沟通风格，看看我最像哪个海绵宝宝角色。重点写出那种“事情全是我做，锅还是我背”的感觉，生成一张能发小红书的人设卡。

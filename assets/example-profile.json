@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "language": "zh-CN",
+  "display_name": "Ivan",
+  "character_id": "spongebob",
+  "character_name": "勤快小海绵 · 海绵宝宝型",
+  "worksona_title": "深海全自动补锅机",
+  "match_score": 92,
+  "confidence": "high",
+  "tagline": "不是我爱加班，是每个坑都刚好长成了我的工位。",
+  "evidence": [
+    "把模糊想法拆成能落地的清单",
+    "追到交付闭环才肯真正收工",
+    "一边吐槽一边把事情救回来"
+  ],
+  "work_mode": "先把现场救回来，再研究是谁挖的坑",
+  "hidden_skill": "把“顺手改一下”还原成十二项真实需求",
+  "workplace_wound": "越靠谱，越容易成为默认兜底人",
+  "boundary_line": "我可以负责，但不接受无限续杯。",
+  "battery": 37,
+  "patch_count": 8,
+  "signal_tags": ["负责到底", "细节雷达", "苦中作梗"],
+  "secondary_character": "章鱼哥",
+  "image_mode": "placeholder",
+  "avatar": "avatar-placeholder.svg",
+  "source_note": "示例内容；真实结果只依据当前可见或用户授权的对话。公开仓库示例使用中性占位图。"
+}

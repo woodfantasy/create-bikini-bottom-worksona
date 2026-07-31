@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bikini Bottom Worksona"
+  short_description: "Turn conversation style into a shareable worksona card"
+  default_prompt: "Use $create-bikini-bottom-worksona to analyze my conversation style and create a shareable worksona card."
